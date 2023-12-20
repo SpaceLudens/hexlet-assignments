@@ -16,6 +16,7 @@ class App {
                 if (entryBooks.getKey().equalsIgnoreCase(entryWord.getKey())
                     && entryBooks.getValue().equalsIgnoreCase(entryWord.getValue()) && iteratorWord.hasNext()) {
                     entryWord = iteratorWord.next();
+                    continue;
                 }
                 if(entryBooks.getKey().equalsIgnoreCase(entryWord.getKey())
                    && entryBooks.getValue().equalsIgnoreCase(entryWord.getValue()) && !iteratorWord.hasNext()) {
