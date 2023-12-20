@@ -33,14 +33,10 @@ class AppTest {
     void testFindWhere2() {
 
         List<Map<String, String>> expected = List.of(
-                Map.of("title", "Still foooing",
-                       "author", "FooBar",
-                       "year", "3333"
+                Map.of("title", "Still foooing", "author", "FooBar", "year", "3333"
                 )
         );
-        Map<String, String> where = Map.of("title", "Still foooing",
-                                           "author", "FooBar",
-                                           "year", "3333"
+        Map<String, String> where = Map.of("title", "Still foooing", "author", "FooBar", "year", "3333"
         );
         List<Map<String, String>> actual = App.findWhere(BOOKS, where);
         assertThat(actual).isEqualTo(expected);
