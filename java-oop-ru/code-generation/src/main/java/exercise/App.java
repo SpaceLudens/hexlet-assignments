@@ -3,7 +3,6 @@ package exercise;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
