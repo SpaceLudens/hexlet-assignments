@@ -1,7 +1,6 @@
 package exercise;
 
 import io.javalin.Javalin;
-import io.javalin.http.NotFoundResponse;
 import io.javalin.validation.ValidationException;
 import java.util.List;
 import exercise.model.Article;
@@ -55,6 +54,7 @@ public final class App {
                 var title = ctx.formParam("title");
                 var content = ctx.formParam("content");
                 var page = new BuildArticlePage(title, content, e.getErrors());
+                ctx.status(422);
                 ctx.render("articles/build.jte", model("page",page));
             }
         });

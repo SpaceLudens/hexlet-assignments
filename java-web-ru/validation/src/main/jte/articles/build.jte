@@ -21,8 +21,10 @@ content = @`
             </label>
         </div>
         <div>
-            <label for="content">Содержимое статьи</label>
-            <textarea id="content" rows="5" cols="33"></textarea>
+            <label>
+                Содержимое статьи
+                <input type="text" required name="content" value="${page.getContent()}" />
+            </label>
         </div>
         <input type="submit" value="Создать статью" />
     </form>
