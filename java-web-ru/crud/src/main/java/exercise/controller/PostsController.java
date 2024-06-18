@@ -19,7 +19,7 @@ public class PostsController {
         var id = context.pathParam("id");
         var post = PostRepository
                .find(Long.valueOf(id))
-               .orElseThrow(() -> new NotFoundResponse("Post with id = " + id + " not found"));
+               .orElseThrow(() -> new NotFoundResponse("Page not found"));
         context.status(404);
         var page = new PostPage((post));
         context.render("posts/show.jte", model("page", page));
