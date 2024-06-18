@@ -22,7 +22,7 @@
                 <a class="page-link" href="?pageNumber=${page.getPage() < 2 ? 1 : page.getPage() - 1}" tabindex="-1" aria-disabled="true">Previous</a>
             </li>
             <li>
-                <a class="page-link" href="?pageNumber=${page.getPage() > page.getPosts().size() ? 1 : page.getPage() + 1}">Next</a>
+                <a class="page-link" href="?pageNumber=${page.getPage() > page.getPosts().size() ? 6 : page.getPage() + 1}">Next</a>
             </li>
         </ul>
     </nav>
