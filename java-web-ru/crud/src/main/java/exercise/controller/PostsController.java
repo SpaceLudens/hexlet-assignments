@@ -16,13 +16,13 @@ public class PostsController {
 
     // BEGIN
     public static void show(Context context) {
-        var id = context.pathParam("id");
+        var id = context.pathParamAsClass("id", Long.class).get();
         var post = PostRepository
-               .find(Long.valueOf(id))
-               .orElseThrow(() -> new NotFoundResponse("Page not found"));
-        context.status(404);
-        var page = new PostPage((post));
+                .find(id)
+                .orElseThrow(() -> new NotFoundResponse("Page not found"));
+        var page = new PostPage(post);
         context.render("posts/show.jte", model("page", page));
+
     }
 
     public static void index(Context context) {
