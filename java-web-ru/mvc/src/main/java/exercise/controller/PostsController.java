@@ -1,13 +1,11 @@
 package exercise.controller;
 
-import static exercise.util.NamedRoutes.editPostPath;
 import static io.javalin.rendering.template.TemplateUtil.model;
 import exercise.dto.posts.PostsPage;
 import exercise.dto.posts.PostPage;
 import exercise.model.Post;
 import exercise.repository.PostRepository;
 import exercise.dto.posts.BuildPostPage;
-import exercise.dto.posts.EditPostPage;
 import exercise.util.NamedRoutes;
 
 import io.javalin.http.Context;
@@ -68,14 +66,13 @@ public class PostsController {
     }
 
     public static void update(Context ctx) {
-            var id = ctx.pathParamAsClass("id", Long.class).get();
-            var post = PostRepository.find(id)
+        var id = ctx.pathParamAsClass("id", Long.class).get();
+        var post = PostRepository.find(id)
                     .orElseThrow(() -> new NotFoundResponse("Пост не найден"));
-            var name = ctx.formParamAsClass("name", String.class)
+        var name = ctx.formParamAsClass("name", String.class)
                     .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
                     .get();
-
-            var body = ctx.formParamAsClass("body", String.class)
+        var body = ctx.formParamAsClass("body", String.class)
                     .check(value -> value.length() >= 10, "Пост должен быть не короче 10 символов")
                     .get();
 
