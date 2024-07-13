@@ -24,11 +24,11 @@ public class NamedRoutes {
 
     // BEGIN
     public static String editPostPath() {
-        return "/posts/edit";
+        return "/edit";
     }
 
     public static String updatePath() {
-        return "/posts/update";
+        return "/posts/";
     }
     // END
 }

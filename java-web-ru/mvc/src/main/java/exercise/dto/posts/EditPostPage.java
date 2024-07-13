@@ -10,11 +10,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 // BEGIN
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class EditPostPage {
-    private Post post;
+    private long id;
+    private String name;
+    private String body;
     private Map<String, List<ValidationError<Object>>> errors;
 }
 // END
