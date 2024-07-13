@@ -75,11 +75,10 @@ public class PostsController {
         var body = ctx.formParamAsClass("body", String.class)
                     .check(value -> value.length() >= 10, "Пост должен быть не короче 10 символов")
                     .get();
-
-            post.setName(name);
-            post.setBody(body);
-            PostRepository.save(post);
-            ctx.redirect(NamedRoutes.postsPath());
+        post.setName(name);
+        post.setBody(body);
+        PostRepository.save(post);
+        ctx.redirect(NamedRoutes.postsPath());
     }
     // END
 }
