@@ -1,6 +1,8 @@
 package exercise.controller;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
+
+import exercise.dto.posts.EditPostPage;
 import exercise.dto.posts.PostsPage;
 import exercise.dto.posts.PostPage;
 import exercise.model.Post;
@@ -61,24 +63,34 @@ public class PostsController {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var post = PostRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Пост не найден"));
-        var page = new PostPage(post);
+        var name = post.getName();
+        var body = post.getBody();
+        var page = new EditPostPage(id, name,body,null);
         ctx.render("posts/edit.jte", model("page", page));
     }
 
     public static void update(Context ctx) {
-        var id = ctx.pathParamAsClass("id", Long.class).get();
-        var post = PostRepository.find(id)
+        try {
+            var id = ctx.pathParamAsClass("id", Long.class).get();
+            var post = PostRepository.find(id)
                     .orElseThrow(() -> new NotFoundResponse("Пост не найден"));
-        var name = ctx.formParamAsClass("name", String.class)
+            var name = ctx.formParamAsClass("name", String.class)
                     .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
                     .get();
-        var body = ctx.formParamAsClass("body", String.class)
+            var body = ctx.formParamAsClass("body", String.class)
                     .check(value -> value.length() >= 10, "Пост должен быть не короче 10 символов")
                     .get();
-        post.setName(name);
-        post.setBody(body);
-        PostRepository.save(post);
-        ctx.redirect(NamedRoutes.postsPath());
+            post.setName(name);
+            post.setBody(body);
+            PostRepository.save(post);
+            ctx.redirect(NamedRoutes.postsPath());
+        } catch (ValidationException e) {
+            var id = ctx.pathParamAsClass("id", Long.class).get();
+            var name = ctx.formParam("name");
+            var body = ctx.formParam("body");
+            var page = new EditPostPage(id,name, body, e.getErrors());
+            ctx.render("posts/edit.jte", model("page", page)).status(422);
+        }
     }
     // END
 }
