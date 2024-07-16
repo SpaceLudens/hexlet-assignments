@@ -35,16 +35,18 @@ public class UsersController {
 
     public static void show(Context context) {
         var id = context.pathParamAsClass("id", Long.class).get();
-        var user = UserRepository.find(id)
-                .orElseThrow(() -> new NotFoundResponse("Entity not found"));
         var token = context.cookie(String.valueOf(id));
-        var page = new UserPage(user);
-        if (Objects.equals(token, user.getToken())) {
-            context.render("users/show.jte", model("page", page));
-
+        if (token != null) {
+            var user = UserRepository.find(id)
+                    .orElseThrow(() -> new NotFoundResponse("Entity nt found"));
+            if (token.equals(user.getToken())) {
+                var page = new UserPage(user);
+                context.render("users/show.jte", model("page", page));
+            }
         } else {
-            context.redirect("/users/build");
+            context.redirect(NamedRoutes.buildUserPath());
         }
+
     }
     // END
 }
