@@ -11,7 +11,7 @@ public class NamedRoutes {
     }
 
     public static String logoutPath() {
-        return "sessions/delete";
+        return "/sessions/delete";
     }
 
     public static String buildSessionPath() {

@@ -3,11 +3,11 @@
 @param LoginPage page
 
 @if(page == null)
-<form action="${NamedRoutes.loginPath()}" method="post">
-    <input type="text"  name="name" placeholder="Name" />
-    <input type="password" name="password" placeholder="Password" />
-    <input type="submit" />
-</form>
+    <form action="${NamedRoutes.loginPath()}" method="post">
+        <input type="text"  name="name" placeholder="Name" />
+        <input type="password" name="password" placeholder="Password" />
+        <input type="submit" />
+    </form>
 @else
     <form action="${NamedRoutes.loginPath()}" method="post">
         <h1>${page.getError()}</h1>

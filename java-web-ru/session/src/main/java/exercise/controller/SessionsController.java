@@ -18,20 +18,17 @@ public class SessionsController {
     public static void create(Context context) {
         var name = context.formParam("name");
         var encryptPassword = Security.encrypt(context.formParam("password"));
-        var user = Generator.getUsers()
-                .stream()
-                .filter(u -> u.getName().equals(name) && u.getPassword().equals(encryptPassword))
-                .toList();
+        var user = UsersRepository.findByName(name);
 
-        if (user != null) {
+        if (user != null && user.getPassword().equals(encryptPassword)) {
             context.sessionAttribute("currentUser", name);
-            context.redirect("/");
+            var page = new MainPage(name);
+            context.render("index.jte", model("page",page));
         } else {
             String error = "Wrong username or password.";
             var page = new LoginPage(name, error);
             context.render("build.jte", model("page",page));
         }
-
     }
 
     public static void build(Context context) {
@@ -39,7 +36,8 @@ public class SessionsController {
     }
 
     public static void delete(Context context) {
-
+        context.sessionAttribute("currentUser", null);
+        context.redirect(NamedRoutes.rootPath());
     }
     // END
 }

@@ -19,7 +19,7 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/", ctx -> {
+        app.get(NamedRoutes.rootPath(), ctx -> {
             var page = new MainPage(ctx.sessionAttribute("userName"));
             ctx.render("index.jte", model("page", page));
         });

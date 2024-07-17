@@ -1,4 +1,5 @@
 @import exercise.dto.MainPage
+@import exercise.util.NamedRoutes
 @param MainPage page
 
 @template.layout.page(
@@ -8,12 +9,12 @@ content = @`
         @if(page.getName() == null)
             <div>
                 Вы не авторизованы
-                <a href="/sessions/build">Войти</a>
+                <a href="${NamedRoutes.buildSessionPath()}">Войти</a>
             </div>
             @else
             <div>
                 <h1>${page.getName().toString()}</h1>
-                <input type="button" name="Выйти">
+                <a href="${NamedRoutes.logoutPath()}">Выйти</a>
             </div>
         @endif
 
