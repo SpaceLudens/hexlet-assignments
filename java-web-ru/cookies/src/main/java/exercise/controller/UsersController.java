@@ -1,6 +1,5 @@
 package exercise.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import exercise.util.Security;
 import exercise.model.User;
 import exercise.util.NamedRoutes;
@@ -27,24 +26,23 @@ public class UsersController {
         var user = new User(firstName, lastName, email, password, token);
         UserRepository.save(user);
         var id = user.getId();
-        context.cookie(String.valueOf(id), token);
+        context.cookie("token", token);
         context.redirect(NamedRoutes.userPath(id));
     }
 
     public static void show(Context context) {
         var id = context.pathParamAsClass("id", Long.class).get();
-        var token = context.cookie(String.valueOf(id));
+        var token = context.cookie("token");
         if (token != null) {
             var user = UserRepository.find(id)
                     .orElseThrow(() -> new NotFoundResponse("Entity nt found"));
             if (token.equals(user.getToken())) {
                 var page = new UserPage(user);
                 context.render("users/show.jte", model("page", page));
+            } else {
+                context.redirect(NamedRoutes.buildUserPath());
             }
-        } else {
-            context.redirect(NamedRoutes.buildUserPath());
         }
-
     }
-    // END
 }
+    // END
