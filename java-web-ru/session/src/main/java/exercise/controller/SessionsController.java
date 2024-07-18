@@ -24,6 +24,7 @@ public class SessionsController {
             context.sessionAttribute("currentUser", name);
             var page = new MainPage(name);
             context.render("index.jte", model("page",page));
+            context.redirect(NamedRoutes.rootPath());
         } else {
             String error = "Wrong username or password.";
             var page = new LoginPage(name, error);
