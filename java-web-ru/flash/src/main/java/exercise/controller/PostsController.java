@@ -26,10 +26,10 @@ public class PostsController {
     public static void create(Context context) {
         try {
             var name = context.formParamAsClass("name", String.class)
-                    .check(val -> val.length() > 2,"The name cannot be less than two characters long")
+                    .check(val -> val.length() > 2, "The name cannot be less than two characters long")
                     .get();
             var body = context.formParamAsClass("body", String.class)
-                    .check(val -> val.length() > 10,"The body cannot be less than ten characters long")
+                    .check(val -> val.length() > 10, "The body cannot be less than ten characters long")
                     .get();
             context.sessionAttribute("flash", "Пост был успешно создан!");
             var post = new Post(name, body);
@@ -39,7 +39,7 @@ public class PostsController {
             var name = context.formParam("name");
             var body = context.formParam("body");
             var page = new BuildPostPage(name, body, e.getErrors());
-            context.render("posts/build.jte", model("page",page));
+            context.render("posts/build.jte", model("page", page));
         }
     }
 
@@ -54,7 +54,7 @@ public class PostsController {
         } else {
             posts = PostRepository.getEntities();
         }
-        var page = new PostsPage(term,posts);
+        var page = new PostsPage(term, posts);
         page.setFlash(context.consumeSessionAttribute("flash"));
         context.render("posts/index.jte", model("page", page));
     }
