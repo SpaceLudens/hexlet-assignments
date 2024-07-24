@@ -28,7 +28,7 @@ public class ProductsRepository extends BaseRepository {
         }
     }
 
-    public static Optional<Product> find(Long id) throws SQLException{
+    public static Optional<Product> find(Long id) throws SQLException {
         var sql = "SELECT * FROM products WHERE id = ?";
         try (var connection = dataSource.getConnection();
              var statement = connection.prepareStatement(sql)) {
