@@ -21,7 +21,7 @@ public class Application {
 
                 var methodName = method.getName();
                 var methodType = method.getReturnType();
-                System.out.println(methodName + " " + methodType);
+                System.out.println("Method getCity returns a value of type " + methodName +"\n"+ "Method getPostalCode returns a value of type " + methodType);
             }
         }
         // END
