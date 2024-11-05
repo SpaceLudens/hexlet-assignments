@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Application {
     @GetMapping("/about")
     String home() {
-        return "Welcome to the Jungle!";
+        return "Welcome to Hexlet!";
     }
 
     public static void main(String[] args) {
