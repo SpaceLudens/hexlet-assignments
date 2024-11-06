@@ -3,6 +3,8 @@ package exercise;
 import exercise.model.Address;
 import exercise.annotation.Inspect;
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Application {
     public static void main(String[] args) {
@@ -15,12 +17,19 @@ public class Application {
 
                 try {
                     method.invoke(address);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                var methodType = method.getReturnType().getName();
+                String regex = "[^.]+$";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(methodType);
+                if (matcher.find()) {
+                    methodType = matcher.group();
+                }
                 var methodName = method.getName();
-                var methodType = method.getReturnType();
+
                 System.out.println("Method getCity returns a value of type " + methodName +"\n"+ "Method getPostalCode returns a value of type " + methodType);
             }
         }
