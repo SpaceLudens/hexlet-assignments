@@ -55,7 +55,7 @@ public class Application {
             return ResponseEntity.ok()
                     .body(post);
         } else {
-            return ResponseEntity.badRequest()
+            return ResponseEntity.status(400)
                     .body(post);
         }
     }
