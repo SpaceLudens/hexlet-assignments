@@ -1,12 +1,10 @@
 package exercise;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,8 +54,10 @@ public class Application {
         if (post.isPresent()) {
             return ResponseEntity.ok()
                     .body(post);
-        } else return ResponseEntity.badRequest()
-                .body(post);
+        } else {
+            return ResponseEntity.badRequest()
+                    .body(post);
+        }
     }
 
     @PutMapping("/posts/{id}") // Обновление страницы
@@ -72,8 +72,10 @@ public class Application {
             page.setBody(data.getBody());
             return ResponseEntity.ok()
                     .body(data);
-        } else return ResponseEntity.status(204)
-                .body(data);
+        } else {
+            return ResponseEntity.status(204)
+                    .body(data);
+        }
     }
     // END
 
