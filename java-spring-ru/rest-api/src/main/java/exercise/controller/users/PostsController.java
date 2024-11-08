@@ -25,19 +25,15 @@ public class PostsController {
 
     @PatchMapping("/users/{id}/posts")
     public ResponseEntity<Post> create(@PathVariable Integer id,
-                                       @RequestParam("slug") String slug,
-                                       @RequestParam("title") String title,
-                                       @RequestParam("body") String body) {
+                                       @RequestBody Post post) {
 
         var status = HttpStatus.CREATED;
 
-        var post = new Post();
-        post.setUserId(id);
-        post.setSlug(slug);
-        post.setTitle(title);
-        post.setBody(body);
+        if (id != null) {
+            post.setUserId(id);
+            data.add(post);
+        }
 
-        data.add(post);
         return ResponseEntity.status(status)
                 .body(post);
     }
