@@ -14,30 +14,32 @@ import exercise.Data;
 @RestController
 @RequestMapping("/api")
 public class PostsController {
-    List<Post> posts = Data.getPosts();
+    List<Post> data = Data.getPosts();
 
     @GetMapping("/users/{id}/posts")
     public List<Post> index(@PathVariable Integer id) {
-
-        return posts.stream()
+        return data.stream()
                 .filter(post -> post.getUserId() == id)
                 .toList();
     }
 
-    @PostMapping("/users/{id}/posts")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Post> create(@PathVariable String slug,
-                                       @PathVariable String title,
-                                       @PathVariable String body,
-                                       @PathVariable Integer id) {
-        var newPost = new Post();
-        newPost.setUserId(id);
-        newPost.setSlug(slug);
-        newPost.setTitle(title);
-        newPost.setBody(body);
-        posts.add(newPost);
-       return ResponseEntity.ok()
-               .body(newPost);
+    @PatchMapping("/users/{id}/posts")
+    public ResponseEntity<Post> create(@PathVariable Integer id,
+                                       @RequestParam("slug") String slug,
+                                       @RequestParam("title") String title,
+                                       @RequestParam("body") String body) {
+
+        var status = HttpStatus.CREATED;
+
+        var post = new Post();
+        post.setUserId(id);
+        post.setSlug(slug);
+        post.setTitle(title);
+        post.setBody(body);
+
+        data.add(post);
+        return ResponseEntity.status(status)
+                .body(post);
     }
 }
 // END
