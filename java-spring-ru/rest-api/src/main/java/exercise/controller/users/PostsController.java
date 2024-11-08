@@ -23,7 +23,7 @@ public class PostsController {
                 .toList();
     }
 
-    @PatchMapping("/users/{id}/posts")
+    @PostMapping("/users/{id}/posts")
     public ResponseEntity<Post> create(@PathVariable Integer id,
                                        @RequestBody Post post) {
 
