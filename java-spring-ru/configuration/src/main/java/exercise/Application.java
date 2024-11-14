@@ -33,8 +33,7 @@ public class Application {
     public List<String> getAdminNames() {
         for (String email : admins.getAdmins()) {
             for (User user : users) {
-                var uEmail = user.getEmail();
-                if (email.equals(uEmail)) {
+                if (email.equals(user.getEmail())) {
                  adminNames.add(user.getName());
                 }
             }

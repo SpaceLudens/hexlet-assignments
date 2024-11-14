@@ -23,9 +23,9 @@ public class PostsController {
                 .toList();
     }
 
-    @PostMapping("/users/{id}/posts")
+    @PatchMapping("/users/{id}/posts")
     public ResponseEntity<Post> create(@PathVariable Integer id,
-                                       @RequestBody Post post) {
+                                       "") {
 
         var status = HttpStatus.CREATED;
 
